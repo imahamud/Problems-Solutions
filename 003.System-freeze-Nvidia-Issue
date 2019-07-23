@@ -1,0 +1,3 @@
+### Problem: System freeze after login in GUI Desktop Environment.
+*May be Nvidia Issue. Looking for solutions.*
+#### Disabling Nvidia GPU after installinf bumblebee may be the solution. Will update after apply.
