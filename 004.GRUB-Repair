@@ -1,0 +1,37 @@
+# Recover GRUB after installing OR updating Windows #
+#####################################################
+# Mount specific partitions
+sudo mount /dev/sda6 /mnt
+sudo mount /dev/sda5 /mnt/boot
+sudo mount /dev/sda1 /mnt/boot/efi
+sudo mount /dev/sda7 /mnt/var
+sudo mount /dev/sda8 /mnt/home
+
+# Mount other required mount points
+sudo mount --bind /dev /mnt/dev &&
+sudo mount --bind /dev/pts /mnt/dev/pts &&
+sudo mount --bind /proc /mnt/proc &&
+sudo mount --bind /sys /mnt/sys
+
+# chroot
+sudo chroot /mnt
+
+# GRUB
+sudo os-prober
+sudo update-grub
+
+# Exit from chroot
+exit
+
+# Unmount other mount points
+sudo umount /dev &&
+sudo umount /dev/pts &&
+sudo umount /proc &&
+sudo umount /sys
+
+# Unmount all
+sudo umount /dev/sda6 &&
+sudo umount /dev/sda5 &&
+sudo umount /dev/sda1 &&
+sudo umount /dev/sda7 &&
+sudo umount /dev/sda8
